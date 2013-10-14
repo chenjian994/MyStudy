@@ -8,10 +8,18 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
   <head>
-    <title></title>
+    <meta charset="UTF-8">
+    <title>FreeMarkerStudy</title>
   </head>
   <body>
-            Hello
-  <a href="fmstudy">fmstudy</a>
+    <b>
+        FreeMarker Study Demo
+    </b>
+    <div style="width:800px; border:1px solid #E3F6CE; padding:13px; margin:20px auto;">
+        <ul>
+            <li><a href="fmstudy?methodName=helloWorld">helloWorld</a></li>
+            <li><a href="fmstudy?methodName=tagAndDirective">标签和指令</a></li>
+        </ul>
+    </div>
   </body>
 </html>

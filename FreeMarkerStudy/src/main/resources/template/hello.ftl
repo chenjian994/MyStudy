@@ -4,6 +4,6 @@
         <title>欢迎</title>
     </head>
     <body>
-                欢迎你  ${name}
+        hello ${name}
     </body>
 </html>

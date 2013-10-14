@@ -13,6 +13,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -24,6 +26,8 @@ import java.util.Map;
  * To change this template use File | Settings | File Templates.
  */
 public class FMStudyServlet extends HttpServlet {
+    public final static String ENCODING = "UTF-8";
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doPost(req, resp);
@@ -31,19 +35,71 @@ public class FMStudyServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Configuration cfg = new Configuration();
-        cfg.setClassForTemplateLoading(FMStudyServlet.class, "/template");
-        cfg.setDefaultEncoding("UTF-8");
-        try {
-            Map<String, Object> root = new HashMap<String, Object>();
-            Template temp = cfg.getTemplate("hello.ftl");
-            temp.setEncoding("UTF-8");
-            root.put("name", "张三");
-            Writer out = new OutputStreamWriter(resp.getOutputStream(), "UTF-8");
-            //TODO     尚未把值传入模版中
-            temp.process(root, out);
-        } catch (TemplateException e) {
+        setConfiguration(FMStudyServlet.class, "/template");
+        String methodName = req.getParameter("methodName");
+        Writer out = new OutputStreamWriter(resp.getOutputStream(), ENCODING);
+        try {         //根据前台传入的方法名动态调用方法
+            Method method = this.getClass().getMethod(methodName, Writer.class, HttpServletRequest.class, HttpServletResponse.class);
+            method.invoke(this, out, req, resp);
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+    }
+
+    public void helloWorld(Writer out, HttpServletRequest req, HttpServletResponse resp) {
+        try {
+            setTemplate("hello.ftl");
+            Map<String, Object> root = new HashMap<String, Object>();
+            root.put("name", " world");
+            template.process(root, out);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void tagAndDirective(Writer out, HttpServletRequest req, HttpServletResponse resp) {
+        try{
+            setTemplate("tagAndDirective.ftl");
+            Map<String, Object> root = new HashMap<String, Object>();
+            String sex = req.getParameter("sex");
+            root.put("sex", sex);
+            template.process(root, out);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setTemplate(String fileName) throws IOException {
+        template = cfg.getTemplate(fileName);
+        template.setEncoding(ENCODING);
+    }
+
+    private void setConfiguration(Class c, String path) {
+        cfg = new Configuration();
+        cfg.setClassForTemplateLoading(c, path);
+        cfg.setDefaultEncoding(ENCODING);
+    }
+
+    private Configuration cfg;
+    private Template template;
+
+    public Configuration getCfg() {
+        return cfg;
+    }
+
+    public void setCfg(Configuration cfg) {
+        this.cfg = cfg;
+    }
+
+    public Template getTemplate() {
+        return template;
+    }
+
+    public void setTemplate(Template template) {
+        this.template = template;
     }
 }
