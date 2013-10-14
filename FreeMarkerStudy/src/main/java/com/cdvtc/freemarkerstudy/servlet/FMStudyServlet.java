@@ -15,7 +15,9 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -67,6 +69,21 @@ public class FMStudyServlet extends HttpServlet {
             Map<String, Object> root = new HashMap<String, Object>();
             String sex = req.getParameter("sex");
             root.put("sex", sex);
+            List<Map<String, Object>> persons = new ArrayList<Map<String, Object>>();
+            Map<String, Object> person;
+            person = new HashMap<String, Object>();
+            person.put("name", "张三");
+            persons.add(person);
+
+            person = new HashMap<String, Object>();
+            person.put("name", "李四");
+            persons.add(person);
+
+            person = new HashMap<String, Object>();
+            person.put("name", "王五");
+            persons.add(person);
+
+            root.put("persons", persons);
             template.process(root, out);
         } catch (Exception e) {
             e.printStackTrace();

@@ -23,5 +23,12 @@
 <#else>
 <p>尚未选择性别！！！</p>
 </#if>
+<hr>
+list使用
+    <ul>
+<#list persons as p>
+        <li>${p.name}</li>
+</#list>
+    </ul>
 </body>
 </html>
