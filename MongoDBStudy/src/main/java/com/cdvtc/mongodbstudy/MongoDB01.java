@@ -37,7 +37,7 @@ public class MongoDB01 {
                     .append("type", "database")
                     .append("count", 1)
                     .append("info", new BasicDBObject("x", 203).append("y", 102));
-            // WriteResult wr = collection.insert(doc);
+            WriteResult wr = collection.insert(doc);
 
             DBObject myDoc = collection.findOne();
             System.out.println("第一条记录：" + myDoc);
@@ -55,9 +55,45 @@ public class MongoDB01 {
             System.out.println("指定查找：");
             BasicDBObject query = new BasicDBObject("name", "MongoDB");
             cursor = collection.find(query);
+            while (cursor.hasNext()) {
+                System.out.println(cursor.next());
+            }
+
+            for (int i = 0; i < 50; i++) {
+                collection.insert(new BasicDBObject("i", i).append("j", i).append("k", i));
+            }
+
+            cursor = collection.find(new BasicDBObject("j", new BasicDBObject("$ne", 3)).append("k", new BasicDBObject("$gt", 10)));
+            System.out.println("____");
+            while (cursor.hasNext()) {
+                System.out.print(cursor.next() + " _ ");
+            }
+            cursor.close();
+
+            System.out.println();
+            System.out.println("打印j大于45的：");
+            cursor = collection.find(new BasicDBObject("j", new BasicDBObject("$gt", 45)));
+            while (cursor.hasNext()) {
+                System.out.println(cursor.next());
+            }
+            cursor.close();
+
+            System.out.println("打印出j大于20小于等于30的：");
+            cursor = collection.find(new BasicDBObject("j", new BasicDBObject("$gt", 20).append("$lte", 30)));
             while(cursor.hasNext()) {
                 System.out.println(cursor.next());
             }
+            cursor.close();
+
+            collection.createIndex(new BasicDBObject("i", 1));
+
+            System.out.println("创建的index:");
+            List<DBObject> list = collection.getIndexInfo();
+            for(DBObject dbo : list) {
+                System.out.println(dbo);
+            }
+
+            collection.drop();
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
