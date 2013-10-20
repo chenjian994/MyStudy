@@ -1,5 +1,3 @@
-学习
-=======
 ### 一.FreeMarkerStudy
 >粗略的了解了下FreeMarker，没写什么。
 
