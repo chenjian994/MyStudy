@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="FreeMarkerStudy:war exploded">
+    <output-path>$PROJECT_DIR$/FreeMarkerStudy/target/FreeMarker-0.0.1</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="FreeMarkerStudy/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="FreeMarkerStudy" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: org.freemarker:freemarker:2.3.20" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
