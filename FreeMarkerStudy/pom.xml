@@ -6,8 +6,12 @@
 
     <groupId>com.cdvtc.chenjian</groupId>
     <artifactId>FreeMarker</artifactId>
-    <packaging>war</packaging>
+    <packaging>pom</packaging>
     <version>0.0.1</version>
+    <modules>
+        <module>../MongoDBStudy</module>
+        <module>../MongoDBStudy</module>
+    </modules>
     <name>FreeMarker</name>
 
     <dependencies>
