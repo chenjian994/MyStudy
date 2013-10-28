@@ -14,8 +14,16 @@ import java.io.PrintWriter;
  */
 @Controller
 public class TestController {
-    @RequestMapping("test.do")
+    @RequestMapping("test")
     public void test(PrintWriter out, String username, String password) {
         out.print("username: " + username + " - password:" + password);
+    }
+    @RequestMapping("forward")
+    public String forward() {
+        return "forward:/forwardPage.jsp";
+    }
+    @RequestMapping("redirect")
+    public String redirect() {
+        return "redirect:/redirectPage.jsp";
     }
 }
