@@ -1,4 +1,4 @@
-<%@page pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8"/>
@@ -23,7 +23,8 @@
     <li>regexURL:<a href="/SpringMVCStudy/annotation/regexURL?requestCode=555">regexURL</a></li>
     <li>@RequestParam: <a href="/SpringMVCStudy/annotation/requestParam?value=pppppppp">value</a></li>
     <li>@RequestHeader: <a href="/SpringMVCStudy/annotation/requestHeader">requestHeader</a></li>
-    <li>@RequestBody: <a href='/SpringMVCStudy/annotation/responseBody'>responseBody</a></li>
+    <li>@ResponseBody: <a href='/SpringMVCStudy/annotation/responseBody1'>responseBody1</a></li>
+    <li>@ResponseBody: <a href='/SpringMVCStudy/annotation/responseBody2'>responseBody2</a></li>
     <li>@ModelAttribute1 : <a href="/SpringMVCStudy/annotation/modelAttribute1?username=zhangsan&password=123456">modelAttribute1</a></li>
     <li>@ModelAttribute2 : <a href="/SpringMVCStudy/annotation/modelAttribute2/zhangsan?password=123456">modelAttribute2</a></li>
     <li>@ModelAttribute3 : <a href="/SpringMVCStudy/annotation/modelAttribute3?username=lisi">modelAttribute3</a></li>

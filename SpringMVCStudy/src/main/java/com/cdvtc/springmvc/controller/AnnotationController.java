@@ -11,7 +11,9 @@ import org.springframework.web.bind.support.SessionStatus;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -66,10 +68,30 @@ public class AnnotationController {
         out.println("name : " + name);
     }
 
-    @RequestMapping(value = "responseBody", method = RequestMethod.GET)
+    @RequestMapping(value = "responseBody1", method = RequestMethod.GET)
     @ResponseBody
-    public User responseBody(@ModelAttribute("user2") User user) {
+    public User responseBody1(@ModelAttribute("user2") User user) {
         return user;
+    }
+
+    @RequestMapping(value = "responseBody2", method = RequestMethod.GET)
+    @ResponseBody
+    public List<User> responseBody2() {
+        List<User> list = new ArrayList<User>();
+        User u = null;
+        u = new User();
+        u.setUsername("111");
+        u.setPassword("111");
+        list.add(u);
+        u = new User();
+        u.setUsername("222");
+        u.setPassword("222");
+        list.add(u);
+        u = new User();
+        u.setUsername("333");
+        u.setPassword("333");
+        list.add(u);
+        return list;
     }
 
     //@ModelAttribute使用
